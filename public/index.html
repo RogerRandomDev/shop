@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="./css/style.css">
+</head>
+<body>
+    <div id="filterBar">
+        
+        <label for="category">Category:</label>
+        <select name="Category" id="category">
+            <option value="food">Food</option>
+            <option value="electronics">Electronics</option>
+            <option value="memes">Memes</option>
+            <option value="suffering">Suffering</option>
+        </select>
+        <label for="filter">Filter:</label>
+        <select name="Filter" id="filter">
+            <option value="Ascending">Ascending</option>
+            <option value="Descending">Descending</option>
+            <option value="A To Z">A To Z</option>
+            <option value="Z To A">Z To A</option>
+        </select>
+        <label for="search">Search:</label>
+        <input type="text" id="search" placeholder="">
+        <button id="Finish" onmousedown="search()">Search</button>
+    </div>
+    <ul id="productList">
+        PRODUCTLISTBLOCK
+    </ul>
+    <script>
+        const search=()=>{
+            var local=window.location
+            
+            window.location.href=window.location.href.split("/")[0]+`/?category=${document.getElementById("category").value}&search=${document.getElementById("search").value}&filter=${document.getElementById("filter").value}`
+        }
+        let params=window.location.href.split("/?")[1]
+        if(params.length>1){
+            document.getElementById("category").value=params[1].split("&")[0].split("=")[1].replaceAll("%20"," ")
+            document.getElementById("search").value=params[1].split("&")[1].split("=")[1].replaceAll("%20"," ")
+            document.getElementById("filter").value=params[1].split("&")[2].split("=")[1].replaceAll("%20"," ")
+
+        }
+    </script>
+</body>
+</html>
